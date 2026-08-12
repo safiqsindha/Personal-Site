@@ -29,3 +29,7 @@ Everything is in `index.html` — markup, styles, and scripts. The illustrations
 ## Deploying
 
 Static files, so anything works. Currently on Cloudflare Pages with no build command and the repo root as the output directory.
+
+## Want to build something similar?
+
+The prompt I used is in [BUILD-YOUR-OWN.md](BUILD-YOUR-OWN.md) — fill in the bracketed sections with your own details and go. It includes the constraints that mattered, the mistakes worth skipping, and deployment notes.
