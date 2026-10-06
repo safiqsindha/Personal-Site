@@ -25,11 +25,16 @@ My personal site: hardware program management at Microsoft Azure, the agent tool
 
 ## Structure
 
-Everything is in `index.html` — markup, styles, and scripts.
+The homepage is entirely `index.html` — markup, styles, and scripts. The blog is plain HTML pages that share one stylesheet.
 
 | File | Purpose |
 |---|---|
-| `index.html` | The entire site |
+| `index.html` | The homepage |
+| `blog/index.html` | Post listing |
+| `blog/<slug>/index.html` | One folder per post, for clean URLs |
+| `blog/blog.css` | Shared blog styles, same tokens as the homepage |
+| `blog/feed.xml` | Atom feed |
+| `_headers` | Cloudflare Pages security and cache headers |
 | `og-image.png` | Social share card (1200×630) |
 | `favicon.svg` / `favicon-*.png` | Icons for browsers, iOS, Android |
 | `robots.txt` / `sitemap.xml` | Crawler directives |
@@ -45,6 +50,16 @@ Everything is in `index.html` — markup, styles, and scripts.
 - `prefers-reduced-motion` disables all of it
 - Printing the page produces a plain-text resume — the card backs become the body copy
 - There is a hidden game
+
+## Writing a post
+
+Still no build step — a post is a hand-written HTML file.
+
+1. Copy `blog/one-html-file/` to `blog/<new-slug>/` and replace the title, description, dates, canonical URL, JSON-LD, and the `.prose` body
+2. Add the post to the top of the list in `blog/index.html`
+3. Add it to the `#writing` section of `index.html` (keep the newest three)
+4. Add an `<entry>` to `blog/feed.xml` and bump the feed's `<updated>`
+5. Add a `<url>` to `sitemap.xml`
 
 ## Deploying
 

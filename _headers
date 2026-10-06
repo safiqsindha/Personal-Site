@@ -1,0 +1,15 @@
+# Cloudflare Pages response headers. https://developers.cloudflare.com/pages/configuration/headers/
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-Frame-Options: DENY
+
+# Icons and the share card rarely change; let browsers keep them for a week.
+/favicon*
+  Cache-Control: public, max-age=604800
+/og-image.png
+  Cache-Control: public, max-age=604800
+
+/blog/feed.xml
+  Content-Type: application/atom+xml; charset=utf-8

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One HTML file, no build step — Safiq Sindha</title>
+<meta name="description" content="Why this site is a single 90 KB file with zero image requests — and the constraints that kept it that way.">
+<link rel="canonical" href="https://safiqsindha.com/blog/one-html-file/">
+<meta name="author" content="Safiq Sindha">
+<meta name="theme-color" content="#152219">
+<meta name="color-scheme" content="dark">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/favicon-180.png">
+<link rel="alternate" type="application/atom+xml" title="Safiq Sindha — Writing" href="/blog/feed.xml">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Safiq Sindha">
+<meta property="og:url" content="https://safiqsindha.com/blog/one-html-file/">
+<meta property="og:title" content="One HTML file, no build step">
+<meta property="og:description" content="Why this site is a single 90 KB file with zero image requests — and the constraints that kept it that way.">
+<meta property="og:image" content="https://safiqsindha.com/og-image.png">
+<meta property="article:published_time" content="2026-10-06">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@safiq5indha">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "One HTML file, no build step",
+  "description": "Why this site is a single 90 KB file with zero image requests — and the constraints that kept it that way.",
+  "datePublished": "2026-10-06",
+  "url": "https://safiqsindha.com/blog/one-html-file/",
+  "image": "https://safiqsindha.com/og-image.png",
+  "author": { "@type": "Person", "name": "Safiq Sindha", "url": "https://safiqsindha.com/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/blog/blog.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav><div class="wrap">
+  <a class="brand" href="/">Safiq Sindha<b>.</b></a>
+  <ul class="navlinks">
+    <li><a href="/">Home</a></li>
+    <li><a href="/blog/">Writing</a></li>
+    <li><a href="/blog/feed.xml">RSS</a></li>
+  </ul>
+</div></nav>
+
+<main id="main"><article class="wrap">
+  <header class="post-head">
+    <div class="eyebrow">Writing</div>
+    <h1>One HTML file, no build step</h1>
+    <p class="lede">Why this site is a single 90 KB file with zero image requests — and the constraints that kept it that way.</p>
+    <p class="meta"><time datetime="2026-10-06">Oct 6, 2026</time> · 3 min read</p>
+  </header>
+
+  <div class="prose">
+    <p>The homepage of this site is one file. Markup, styles, and scripts all live in <code>index.html</code>. There's no framework, no bundler, and no build command — deploying is copying files to Cloudflare Pages.</p>
+
+    <p>That wasn't an accident. It was the first constraint I set, and most of the interesting decisions came from refusing to break it.</p>
+
+    <h2>Zero image requests</h2>
+    <p>Every illustration on the page — the postcard scenes, the ridgelines, the paper grain — is hand-written inline SVG. The grain is a single <code>feTurbulence</code> filter in a data URI. The page renders without fetching a single additional image, which keeps the whole thing around 90 KB.</p>
+
+    <h2>Motion that behaves</h2>
+    <p>Things move, but politely:</p>
+    <ul>
+      <li>Ridgeline parallax and the badge pendulum share <strong>one <code>requestAnimationFrame</code> loop</strong> that stops scheduling itself once nothing is moving.</li>
+      <li>Geometry is measured on load and resize only — never per frame — so scrolling never forces a layout.</li>
+      <li>Postcard animations pause when they're off-screen, via <code>IntersectionObserver</code>.</li>
+      <li><code>prefers-reduced-motion</code> turns all of it off.</li>
+    </ul>
+
+    <h2>It degrades to a resume</h2>
+    <p>Hit print and the page collapses into a plain document: the illustrations disappear, and the backs of the postcards become the body copy. Nothing important lives only behind an interaction — card fronts carry the headline facts, and the detail is one flip away.</p>
+
+    <h2>What I'd tell someone building their own</h2>
+    <p>Pick the constraint first and let it make decisions for you. "No build step" ruled out a lot of tempting libraries before I had to argue with myself about them. The full prompt I used is in the repository's <a href="https://github.com/safiqsindha/Personal-Site/blob/main/BUILD-YOUR-OWN.md">BUILD-YOUR-OWN.md</a> if you want a starting point.</p>
+
+    <p>And yes, there's a hidden game.</p>
+  </div>
+
+  <div class="post-foot">
+    <a href="/blog/">← All writing</a>
+    <a href="/">safiqsindha.com</a>
+  </div>
+</article></main>
+
+<footer><div class="wrap">
+  <span>Seattle, WA</span>
+  <span><a href="/">safiqsindha.com</a> · <a href="/blog/feed.xml">RSS</a></span>
+</div></footer>
+</body>
+</html>
