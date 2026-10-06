@@ -1,0 +1,12 @@
+// Deploy config for the personal-site Worker. The site is plain static files
+// served straight from the repository root; there is no Worker script.
+{
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "name": "personal-site",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": ".",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  }
+}

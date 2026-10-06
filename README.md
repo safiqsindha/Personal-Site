@@ -34,7 +34,8 @@ The homepage is entirely `index.html` — markup, styles, and scripts. The blog 
 | `blog/<slug>/index.html` | One folder per post, for clean URLs |
 | `blog/blog.css` | Shared blog styles, same tokens as the homepage |
 | `blog/feed.xml` | Atom feed |
-| `_headers` | Cloudflare Pages security and cache headers |
+| `_headers` | Security and cache headers, applied by Cloudflare |
+| `wrangler.jsonc` / `.assetsignore` | Deploy config: serve the repo root as static assets, minus repo-only files |
 | `og-image.png` | Social share card (1200×630) |
 | `favicon.svg` / `favicon-*.png` | Icons for browsers, iOS, Android |
 | `robots.txt` / `sitemap.xml` | Crawler directives |
@@ -63,7 +64,9 @@ Still no build step — a post is a hand-written HTML file.
 
 ## Deploying
 
-Static files, so anything works. Currently on Cloudflare Pages with no build command and the repository root as the output directory.
+Static files, so anything works. Currently a Cloudflare Worker with static assets, deployed by Workers Builds on every push: `wrangler.jsonc` points the Worker at the repository root, and `.assetsignore` keeps the README, build notes, banner art, and `.git` out of the upload. There is no Worker script and no build command.
+
+For a local preview, `python3 -m http.server` from the repo root is enough. `wrangler dev` reloads in a loop here because it writes to `.wrangler/` inside the folder it serves.
 
 ## Want to build something similar?
 
