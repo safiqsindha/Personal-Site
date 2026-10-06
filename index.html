@@ -9,6 +9,8 @@
 <link rel="canonical" href="https://safiqsindha.com/">
 <meta name="author" content="Safiq Sindha">
 <meta name="theme-color" content="#152219">
+<meta name="color-scheme" content="dark">
+<link rel="alternate" type="application/atom+xml" title="Safiq Sindha — Writing" href="/blog/feed.xml">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
@@ -45,7 +47,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --forest:#152219; --forest-deep:#0E1711; --canopy:#26402F;
@@ -89,12 +91,13 @@
   .navlinks{display:flex;gap:24px;list-style:none;font-size:13.5px}
   .navlinks button{text-decoration:none;color:var(--cream-dim);transition:color .18s;
     background:none;border:none;font:inherit;cursor:pointer;padding:0;position:relative}
-  .navlinks button:hover{color:var(--cream)}
+  .navlinks button:hover,.navlinks a:hover{color:var(--cream)}
+  .navlinks a{text-decoration:none;color:var(--cream-dim);transition:color .18s}
   .navlinks button::after{content:'';position:absolute;left:0;right:0;bottom:-6px;height:1.5px;
     background:var(--ochre);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
   .navlinks button.here{color:var(--cream)}
   .navlinks button.here::after{transform:scaleX(1)}
-  @media(max-width:720px){.navlinks{display:none}}
+  @media(max-width:720px){.navlinks li:not(.keep){display:none}}
 
   section{position:relative;padding:104px 0 96px;overflow:hidden}
   .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.16em;
@@ -239,6 +242,12 @@
   .row-org{font-size:13px;color:var(--ochre);margin-top:2px;margin-bottom:9px}
   .row-body{font-size:14.5px;color:var(--cream-dim);max-width:70ch}
   .row-body + .row-body{margin-top:9px}
+  .row-link{text-decoration:none;color:inherit}
+  .row-link .row-role{transition:color .18s}
+  .row-link:hover .row-role{color:var(--ochre)}
+  .more{display:inline-block;margin-top:26px;font-family:'JetBrains Mono',monospace;font-size:11.5px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ochre);text-decoration:none;position:relative;z-index:2}
+  .more:hover{text-decoration:underline;text-underline-offset:4px}
 
   /* badge */
   #badge-band{padding:96px 0 88px}
@@ -324,7 +333,7 @@
     .row{ page-break-inside:avoid; padding:8pt 0 }
     .row-when{ color:#666 } .row-role{ font-size:11pt; color:#111 }
     .row-org{ color:#555 } .row-body{ color:#333; font-size:9.5pt; max-width:none }
-    #badge-band{ display:none }
+    #badge-band,#writing{ display:none }
     .badge{ animation:none; box-shadow:none }
     footer{ border-color:#CCC; color:#666; margin-top:10pt; padding:8pt 0 }
     .reveal{ opacity:1 !important; transform:none !important }
@@ -362,10 +371,12 @@
     <li><button type="button" data-scroll="leading">Leading</button></li>
     <li><button type="button" data-scroll="builds">Builds</button></li>
     <li><button type="button" data-scroll="history">History</button></li>
+    <li class="keep"><a href="/blog/">Writing</a></li>
     <li><button type="button" data-scroll="contact">Contact</button></li>
   </ul>
 </div></nav>
 
+<main>
 <!-- HERO -->
 <section id="top">
   <div class="grain" aria-hidden="true"></div>
@@ -1092,6 +1103,28 @@
   <div class="ridge far" aria-hidden="true"></div><div class="ridge near" aria-hidden="true"></div>
 </section>
 
+<!-- WRITING -->
+<!-- Newest three posts. Keep in sync with /blog/index.html and /blog/feed.xml. -->
+<section id="writing">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="eyebrow reveal">Writing</div>
+    <h2 class="reveal">Notes, occasionally</h2>
+    <p class="lede reveal">Hardware programs, agent tooling, and whatever I learned the hard way this month.</p>
+    <div class="ledger">
+      <a class="row row-link reveal" href="/blog/one-html-file/">
+        <div class="row-when"><time datetime="2026-10-06">Oct 6, 2026</time></div>
+        <div>
+          <div class="row-role">One HTML file, no build step</div>
+          <p class="row-body">Why this site is a single 90 KB file with zero image requests — and the constraints that kept it that way.</p>
+        </div>
+      </a>
+    </div>
+    <a class="more reveal" href="/blog/">All writing →</a>
+  </div>
+  <div class="ridge far" aria-hidden="true"></div><div class="ridge near" aria-hidden="true"></div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="grain" aria-hidden="true"></div>
@@ -1112,12 +1145,14 @@
   <div class="ridge far" aria-hidden="true"></div><div class="ridge near" aria-hidden="true"></div>
 </section>
 
+</main>
+
 <!-- SNAKE -->
-<div class="snake-overlay" id="snake" hidden>
+<div class="snake-overlay" id="snake" role="dialog" aria-modal="true" aria-labelledby="snake-title" hidden>
   <div class="snake-box">
     <div class="snake-top">
-      <h3>Snake</h3>
-      <button id="snake-close">Esc · Close</button>
+      <h3 id="snake-title">Snake</h3>
+      <button type="button" id="snake-close">Esc · Close</button>
     </div>
     <canvas id="snake-canvas" width="320" height="320"></canvas>
     <div class="snake-bot">
@@ -1298,7 +1333,7 @@
     var scoreEl = document.getElementById('snake-score');
     var msgEl   = document.getElementById('snake-msg');
     var CELL = 16, COLS = 20, ROWS = 20;
-    var snake, dir, queue, food, score, timer, dead;
+    var snake, dir, queue, food, score, timer, dead, opener;
 
     function spawnFood(){
       var open = [];
@@ -1372,7 +1407,9 @@
     }
 
     function open(){
+      opener = document.activeElement;
       overlay.hidden = false;
+      document.getElementById('snake-close').focus();
       document.body.style.overflow = 'hidden';
       reset();
       clearInterval(timer);
@@ -1382,6 +1419,7 @@
       overlay.hidden = true;
       document.body.style.overflow = '';
       clearInterval(timer);
+      if(opener && opener.focus) opener.focus();
     }
 
     var egg = document.getElementById('egg');

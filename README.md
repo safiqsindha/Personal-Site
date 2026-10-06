@@ -25,11 +25,17 @@ My personal site: hardware program management at Microsoft Azure, the agent tool
 
 ## Structure
 
-Everything is in `index.html` — markup, styles, and scripts.
+The homepage is entirely `index.html` — markup, styles, and scripts. The blog is plain HTML pages that share one stylesheet.
 
 | File | Purpose |
 |---|---|
-| `index.html` | The entire site |
+| `index.html` | The homepage |
+| `blog/index.html` | Post listing |
+| `blog/<slug>/index.html` | One folder per post, for clean URLs |
+| `blog/blog.css` | Shared blog styles, same tokens as the homepage |
+| `blog/feed.xml` | Atom feed |
+| `_headers` | Security and cache headers, applied by Cloudflare |
+| `wrangler.jsonc` / `.assetsignore` | Deploy config: serve the repo root as static assets, minus repo-only files |
 | `og-image.png` | Social share card (1200×630) |
 | `favicon.svg` / `favicon-*.png` | Icons for browsers, iOS, Android |
 | `robots.txt` / `sitemap.xml` | Crawler directives |
@@ -46,9 +52,21 @@ Everything is in `index.html` — markup, styles, and scripts.
 - Printing the page produces a plain-text resume — the card backs become the body copy
 - There is a hidden game
 
+## Writing a post
+
+Still no build step — a post is a hand-written HTML file.
+
+1. Copy `blog/one-html-file/` to `blog/<new-slug>/` and replace the title, description, dates, canonical URL, JSON-LD, and the `.prose` body
+2. Add the post to the top of the list in `blog/index.html`
+3. Add it to the `#writing` section of `index.html` (keep the newest three)
+4. Add an `<entry>` to `blog/feed.xml` and bump the feed's `<updated>`
+5. Add a `<url>` to `sitemap.xml`
+
 ## Deploying
 
-Static files, so anything works. Currently on Cloudflare Pages with no build command and the repository root as the output directory.
+Static files, so anything works. Currently a Cloudflare Worker with static assets, deployed by Workers Builds on every push: `wrangler.jsonc` points the Worker at the repository root, and `.assetsignore` keeps the README, build notes, banner art, and `.git` out of the upload. There is no Worker script and no build command.
+
+For a local preview, `python3 -m http.server` from the repo root is enough. `wrangler dev` reloads in a loop here because it writes to `.wrangler/` inside the folder it serves.
 
 ## Want to build something similar?
 

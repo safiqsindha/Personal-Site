@@ -1,0 +1,10 @@
+# Repository files that should not be published as part of the site.
+.git
+.github
+.claude
+node_modules
+.wrangler
+wrangler.jsonc
+README.md
+BUILD-YOUR-OWN.md
+assets/
