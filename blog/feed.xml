@@ -4,7 +4,7 @@
   <subtitle>Notes on compute hardware, program management, and the agent tooling I build on the side.</subtitle>
   <link href="https://www.safiqsindha.com/blog/feed.xml" rel="self"/>
   <link href="https://www.safiqsindha.com/blog/"/>
-  <id>https://www.safiqsindha.com/blog/</id>
+  <id>https://safiqsindha.com/blog/</id>
   <updated>2026-10-06T00:00:00Z</updated>
   <author><name>Safiq Sindha</name><uri>https://www.safiqsindha.com/</uri></author>
 
@@ -12,7 +12,7 @@
   <entry>
     <title>One HTML file, no build step</title>
     <link href="https://www.safiqsindha.com/blog/one-html-file/"/>
-    <id>https://www.safiqsindha.com/blog/one-html-file/</id>
+    <id>https://safiqsindha.com/blog/one-html-file/</id>
     <published>2026-10-06T00:00:00Z</published>
     <updated>2026-10-06T00:00:00Z</updated>
     <summary>Why this site is a single 90 KB file with zero image requests — and the constraints that kept it that way.</summary>

@@ -51,7 +51,7 @@
 <style>
   :root{
     --forest:#152219; --forest-deep:#0E1711; --canopy:#26402F;
-    --cream:#EFE7D6; --cream-dim:rgba(239,231,214,.62); --cream-faint:rgba(239,231,214,.6);
+    --cream:#EFE7D6; --cream-dim:rgba(239,231,214,.74); --cream-faint:rgba(239,231,214,.6);
     --ochre:#C89A4A; --moss:#5B7F63; --clay:#A85C3E; --slate:#4A6472; --plum:#6E4B5A;
     --teal:#3F6E6A; --rust:#9A4F33; --indigo:#4A5479; --burnt:#B25A2E; --night:#33507A;
     --rule:rgba(239,231,214,.14);
@@ -103,6 +103,7 @@
     .navlinks{flex:0 1 auto;min-width:0;overflow-x:auto;gap:2px;font-size:12.5px;white-space:nowrap;
       scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
     .navlinks::-webkit-scrollbar{display:none}
+    .navlinks{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent);padding-right:18px}
     .navlinks li{flex:none}
     .navlinks button,.navlinks a{display:block;padding:12px 6px;min-height:40px}
     .navlinks button::after{left:6px;right:6px;bottom:7px}
@@ -148,7 +149,7 @@
     .proof-row.center div{padding-left:16px;padding-right:16px}
     .proof-row.center.three{flex-wrap:nowrap}
     .proof-row.center.three div{flex:1 1 0;min-width:0;padding-left:6px;padding-right:6px;margin-right:0;text-align:center}
-    .proof dt{font-size:21px} .proof dd{font-size:11px;letter-spacing:.04em}
+    .proof dt{font-size:21px} .proof dd{font-size:11px;letter-spacing:0}
   }
 
   /* postcards */
@@ -174,10 +175,10 @@
     clip-path:polygon(100% 0,0 0,100% 100%);filter:drop-shadow(-2px 2px 3px rgba(0,0,0,.34))}
   .scene{position:absolute;inset:0;width:100%;height:100%;display:block}
   .scrim{position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,transparent 22%,rgba(0,0,0,.12) 36%,rgba(0,0,0,.55) 54%,rgba(0,0,0,.82) 80%)}
+    background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.08) 24%,rgba(0,0,0,.12) 36%,rgba(0,0,0,.55) 54%,rgba(0,0,0,.82) 80%)}
   .face-txt{position:absolute;inset:0;z-index:3;padding:19px 20px;display:flex;flex-direction:column}
   .c-tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.13em;
-    text-transform:uppercase;color:rgba(255,255,255,.82)}
+    text-transform:uppercase;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.7),0 0 10px rgba(0,0,0,.55)}
   .c-figure{font-family:'Fraunces',serif;font-weight:600;font-size:34px;line-height:1;
     letter-spacing:-.03em;margin-top:auto;text-shadow:0 2px 12px rgba(0,0,0,.55)}
   .c-figure.sm{font-size:28px;letter-spacing:-.04em}
@@ -362,13 +363,13 @@
   .snake-top{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:14px}
   .snake-top h3{font-family:'Fraunces',serif;font-weight:600;font-size:18px}
   .snake-top button{background:none;border:1px solid var(--rule);color:var(--cream-dim);
-    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
     padding:6px 12px;border-radius:20px;cursor:pointer}
   .snake-top button:hover{color:var(--cream)}
   #snake-canvas{display:block;border-radius:6px;background:#101E15;border:1px solid var(--rule);
     touch-action:none;max-width:100%;height:auto}
   .snake-bot{display:flex;justify-content:space-between;gap:16px;margin-top:12px;
-    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;
     text-transform:uppercase;color:var(--cream-faint)}
   .snake-bot b{color:var(--ochre);font-weight:500}
 </style>
@@ -405,7 +406,7 @@
       </div>
       <div class="proof-row center three">
         <div><dt>1st</dt><dd>ARM GP fleet</dd></div>
-        <div><dt>450</dt><dd>Racks delivered</dd></div>
+        <div><dt>450</dt><dd>NPI racks</dd></div>
         <div><dt>200K</dt><dd>Cores per day</dd></div>
       </div>
     </dl>
