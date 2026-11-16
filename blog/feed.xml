@@ -2,16 +2,16 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Safiq Sindha — Writing</title>
   <subtitle>Notes on compute hardware, program management, and the agent tooling I build on the side.</subtitle>
-  <link href="https://safiqsindha.com/blog/feed.xml" rel="self"/>
-  <link href="https://safiqsindha.com/blog/"/>
+  <link href="https://www.safiqsindha.com/blog/feed.xml" rel="self"/>
+  <link href="https://www.safiqsindha.com/blog/"/>
   <id>https://safiqsindha.com/blog/</id>
   <updated>2026-10-06T00:00:00Z</updated>
-  <author><name>Safiq Sindha</name><uri>https://safiqsindha.com/</uri></author>
+  <author><name>Safiq Sindha</name><uri>https://www.safiqsindha.com/</uri></author>
 
   <!-- Newest first. Bump <updated> above whenever you add an entry. -->
   <entry>
     <title>One HTML file, no build step</title>
-    <link href="https://safiqsindha.com/blog/one-html-file/"/>
+    <link href="https://www.safiqsindha.com/blog/one-html-file/"/>
     <id>https://safiqsindha.com/blog/one-html-file/</id>
     <published>2026-10-06T00:00:00Z</published>
     <updated>2026-10-06T00:00:00Z</updated>

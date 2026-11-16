@@ -1,7 +1,7 @@
 /* Shared styles for /blog/. Tokens match index.html so the two read as one site. */
 :root{
   --forest:#152219; --forest-deep:#0E1711; --canopy:#26402F;
-  --cream:#EFE7D6; --cream-dim:rgba(239,231,214,.68); --cream-faint:rgba(239,231,214,.4);
+  --cream:#EFE7D6; --cream-dim:rgba(239,231,214,.68); --cream-faint:rgba(239,231,214,.6);
   --ochre:#C89A4A; --clay:#A85C3E;
   --rule:rgba(239,231,214,.14);
 }
