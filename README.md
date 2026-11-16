@@ -36,12 +36,12 @@ The homepage is entirely `index.html` — markup, styles, and scripts. The blog 
 | `blog/feed.xml` | Atom feed |
 | `_headers` | Security and cache headers, applied by Cloudflare |
 | `wrangler.jsonc` / `.assetsignore` | Deploy config: serve the repo root as static assets, minus repo-only files |
+| `safiq-sindha-resume.pdf` | Resume, linked from the contact section |
 | `og-image.png` | Social share card (1200×630) |
 | `favicon.svg` / `favicon-*.png` | Icons for browsers, iOS, Android |
 | `robots.txt` / `sitemap.xml` | Crawler directives |
 | `assets/` | README banner artwork |
 
-> **Known gap:** `index.html` links to `safiq-sindha-resume.pdf`, which is not tracked in this repository. Either commit the PDF or update the link in the contact section.
 
 ## Notes
 
