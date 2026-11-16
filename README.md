@@ -30,6 +30,7 @@ The homepage is entirely `index.html` — markup, styles, and scripts. The blog 
 | File | Purpose |
 |---|---|
 | `index.html` | The homepage |
+| `404.html` | Not-found page, served via `not_found_handling` in `wrangler.jsonc` |
 | `blog/index.html` | Post listing |
 | `blog/<slug>/index.html` | One folder per post, for clean URLs |
 | `blog/blog.css` | Shared blog styles, same tokens as the homepage |
