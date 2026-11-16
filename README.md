@@ -1,78 +1,64 @@
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg">
-    <img src="assets/banner-light.svg" alt="Personal Site" width="100%">
-  </picture>
-</p>
+# safiqsindha.com: one HTML file, no build step
 
-# safiqsindha.com
+[Live site](https://www.safiqsindha.com) · [Writing](https://www.safiqsindha.com/blog/) · [Resume (PDF)](https://www.safiqsindha.com/safiq-sindha-resume.pdf) · [Build your own](BUILD-YOUR-OWN.md)
 
-**One self-contained HTML file. No build step, no framework, no image requests.**
+The personal site of a hardware program manager at Microsoft Azure who builds agent evals on the side. The homepage is a single hand-written `index.html`: markup, styles and scripts in one file, 97 KB on disk and about 25 KB over the wire. Every illustration, including the 17 flip-card postcards, is inline SVG, so the page makes no image requests. There is no framework, no bundler and no build command; deploying is copying files.
 
-My personal site: hardware program management at Microsoft Azure, the agent tooling I build outside of it, and a paper-cut forest that I probably spent longer on than I should have.
+## Design decisions
 
-- **~90 KB, zero images** — every illustration is hand-written inline SVG, so the page renders without a single additional request
-- **No build step at all** — markup, styles, and scripts live in one `index.html`; deploying is copying files
-- **Motion that behaves** — one `requestAnimationFrame` loop that idles when nothing moves, off-screen animation paused via `IntersectionObserver`, and everything disabled under `prefers-reduced-motion`
-- **Degrades to a resume** — printing the page produces plain-text body copy from the card backs
+**One file is the constraint that decides everything else.** "No build step" ruled out most libraries before they could be argued for. The trade-off is a long file; it stays navigable because every section is a commented block in page order.
 
-![Live](https://img.shields.io/badge/live-safiqsindha.com-22c55e?style=flat-square)
-![Build](https://img.shields.io/badge/build%20step-none-22c55e?style=flat-square)
-![Size](https://img.shields.io/badge/size-~90KB-22c55e?style=flat-square)
-![Dependencies](https://img.shields.io/badge/dependencies-Google%20Fonts%20only-0891b2?style=flat-square)
+**Headline numbers on the front, detail on the back.** Each postcard leads with its strongest fact (450 racks, 97%, $10M) so nothing important is hidden behind a click. The back holds the supporting detail.
 
-**[Live site](https://safiqsindha.com)** · **[Build your own](BUILD-YOUR-OWN.md)**
+**Motion that idles.** One `requestAnimationFrame` loop drives the ridgeline parallax and the badge pendulum, and stops when nothing moves. Off-screen card animations pause through `IntersectionObserver`, and `prefers-reduced-motion` turns all of it off.
 
-## Structure
+**Readable without the tricks.** The page works with JavaScript off, text meets 4.5:1 contrast with nothing under 11px, the phone nav keeps all six links, and printing produces a plain-text resume built from the card backs.
 
-The homepage is entirely `index.html` — markup, styles, and scripts. The blog is plain HTML pages that share one stylesheet.
+**One fact, one source.** Every figure on the site matches the resume PDF in this repository; when they disagree, the resume wins.
 
-| File | Purpose |
-|---|---|
-| `index.html` | The homepage |
-| `404.html` | Not-found page, served via `not_found_handling` in `wrangler.jsonc` |
-| `blog/index.html` | Post listing |
-| `blog/<slug>/index.html` | One folder per post, for clean URLs |
-| `blog/blog.css` | Shared blog styles, same tokens as the homepage |
-| `blog/feed.xml` | Atom feed |
-| `_headers` | Security and cache headers, applied by Cloudflare |
-| `wrangler.jsonc` / `.assetsignore` | Deploy config: serve the repo root as static assets, minus repo-only files |
-| `safiq-sindha-resume.pdf` | Resume, linked from the contact section |
-| `og-image.png` | Social share card (1200×630) |
-| `favicon.svg` / `favicon-*.png` | Icons for browsers, iOS, Android |
-| `robots.txt` / `sitemap.xml` | Crawler directives |
-| `assets/` | README banner artwork |
+Scope: Google Fonts is the only third-party dependency, and Cloudflare adds its analytics beacon at the edge. Card details sit behind a flip, which is a deliberate cost of the postcard design. There is a hidden game.
 
+## Repository
 
-## Notes
+```
+index.html                 the homepage: markup, styles, scripts, inline SVG
+404.html                   not-found page, served by the Worker's 404-page handling
+blog/                      plain HTML posts sharing blog.css, plus the Atom feed
+safiq-sindha-resume.pdf    the resume linked from the contact section
+_headers                   security and cache headers, applied by Cloudflare
+wrangler.jsonc             deploy config: serve the repo root as static assets
+.assetsignore              repo-only files kept out of the upload
+robots.txt, sitemap.xml    crawler directives
+og-image.png, favicon*     share card and icons
+BUILD-YOUR-OWN.md          the prompt behind the site, for reuse
+```
 
-- Postcards flip on click or keyboard; card fronts carry the headline facts, so nothing important is hidden behind an interaction
-- Ridgeline parallax and the badge pendulum are driven by scroll position, in a single `requestAnimationFrame` loop that idles when nothing is moving
-- Off-screen card animations pause via `IntersectionObserver`
-- `prefers-reduced-motion` disables all of it
-- Printing the page produces a plain-text resume — the card backs become the body copy
-- There is a hidden game
+## Running it locally
+
+```
+python3 -m http.server     # then open http://localhost:8000
+```
+
+`python3 -m http.server` does not serve `404.html` for missing paths; open it directly to preview it. `wrangler dev` reloads in a loop here because it writes to `.wrangler/` inside the folder it serves.
+
+## Deploying
+
+A Cloudflare Worker with static assets, deployed by Workers Builds on every push to `main`. Pull requests get a preview URL. There is no Worker script and no build command; `.assetsignore` keeps the README, build notes and `.git` out of the upload. The canonical host is `www.safiqsindha.com`.
 
 ## Writing a post
 
-Still no build step — a post is a hand-written HTML file.
+A post is a hand-written HTML file.
 
-1. Copy `blog/one-html-file/` to `blog/<new-slug>/` and replace the title, description, dates, canonical URL, JSON-LD, and the `.prose` body
+1. Copy `blog/one-html-file/` to `blog/<new-slug>/` and replace the title, description, dates, canonical URL, JSON-LD and the `.prose` body
 2. Add the post to the top of the list in `blog/index.html`
 3. Add it to the `#writing` section of `index.html` (keep the newest three)
 4. Add an `<entry>` to `blog/feed.xml` and bump the feed's `<updated>`
 5. Add a `<url>` to `sitemap.xml`
 
-## Deploying
+## Building something similar
 
-Static files, so anything works. Currently a Cloudflare Worker with static assets, deployed by Workers Builds on every push: `wrangler.jsonc` points the Worker at the repository root, and `.assetsignore` keeps the README, build notes, banner art, and `.git` out of the upload. There is no Worker script and no build command.
-
-For a local preview, `python3 -m http.server` from the repo root is enough. `wrangler dev` reloads in a loop here because it writes to `.wrangler/` inside the folder it serves.
-
-## Want to build something similar?
-
-The prompt I used is in **[BUILD-YOUR-OWN.md](BUILD-YOUR-OWN.md)** — fill in the bracketed sections with your own details and go. It covers the constraints that mattered, the mistakes worth skipping, and deployment notes.
+The prompt is in [BUILD-YOUR-OWN.md](BUILD-YOUR-OWN.md): fill in the bracketed sections with your own details. It covers the constraints that mattered, the mistakes worth skipping, and deployment notes.
 
 ## License
 
-No license file is present in this repository. The design and copy are personal; the approach in [BUILD-YOUR-OWN.md](BUILD-YOUR-OWN.md) is free to reuse.
+No license file. The design and copy are personal; the approach in [BUILD-YOUR-OWN.md](BUILD-YOUR-OWN.md) is free to reuse.
